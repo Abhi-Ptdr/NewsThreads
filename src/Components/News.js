@@ -26,8 +26,8 @@ export class News extends Component {
     }
   }
 
-  async componentDidMount(){ 
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=1`; //here in class based component no need to pass props as argument becoz classes never takes arg/parameter as funtions
+  async updateNews(){
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=${this.state.page}`; //here in class based component no need to pass props as argument becoz classes never takes arg/parameter as funtions
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -38,33 +38,48 @@ export class News extends Component {
     })
   }
 
+  async componentDidMount(){ 
+    // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=1`; //here in class based component no need to pass props as argument becoz classes never takes arg/parameter as funtions
+    // this.setState({loading: true})
+    // let data = await fetch(url);
+    // let parsedData = await data.json();
+    // this.setState({
+    //   articles: parsedData.articles,
+    //   totalResults: parsedData.totalResults,
+    //   loading: false
+    // })
+    this.updateNews();
+  }
+
   handlePrevClick = async ()=>{
-    console.log("prev");
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=${this.state.page - 1}`; //setting pageSize varible by giving props to the Newj component
-      this.setState({loading: true})
-      let data = await fetch(url);
-      let parsedData = await data.json();
-      this.setState({
-        page: this.state.page - 1,
-        articles: parsedData.articles,
-        loading: false
-      })
+    //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=${this.state.page - 1}`; //setting pageSize varible by giving props to the Newj component
+    //   this.setState({loading: true})
+    //   let data = await fetch(url);
+    //   let parsedData = await data.json();
+    //   this.setState({
+    //     page: this.state.page - 1,
+    //     articles: parsedData.articles,
+    //     loading: false
+    //   })
+    this.setState({page: this.state.page - 1});
+    this.updateNews();
   }
 
   handleNextClick = async ()=>{
-    console.log("next");
-    if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){  //21 is replaced by this.props.pageSize everywhere
-        //negation is applied so we can do else vala part in it
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=${this.state.page + 1}`;
-      this.setState({loading: true});
-      let data = await fetch(url);
-      let parsedData = await data.json();
-      this.setState({
-        page: this.state.page + 1,
-        articles: parsedData.articles,
-        loading: false
-      })
-    }
+    // if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){  //21 is replaced by this.props.pageSize everywhere
+    //     //negation is applied so we can do else vala part in it
+    //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=028c82e1117c4615a152c8c3862e1e4c&page=${this.state.page + 1}`;
+    //   this.setState({loading: true});
+    //   let data = await fetch(url);
+    //   let parsedData = await data.json();
+    //   this.setState({
+    //     page: this.state.page + 1,
+    //     articles: parsedData.articles,
+    //     loading: false
+    //   })
+    // }
+    this.setState({page: this.state.page + 1});
+    this.updateNews();
   }
   
   render() {
