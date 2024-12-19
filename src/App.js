@@ -10,7 +10,7 @@ import {  //but first install react-router-dom "npm install react-router-dom" re
 } from "react-router-dom";
 
 export default class App extends Component {
-  pageSize = 21;
+  pageSize = 6;
   country = 'us'
 
   render() {
