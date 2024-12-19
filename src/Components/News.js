@@ -67,7 +67,6 @@ export class News extends Component {
         {this.state.loading && <Spinner/>}
 
         <InfiniteScroll dataLength={this.state.articles.length} next={this.fetchMoreData} hasMore={this.state.articles.length !== this.state.totalResults} loader={<Spinner/>}>
-          
           <div className="container">
             <div className="row">
               {this.state.articles.map((element)=>{
@@ -78,7 +77,6 @@ export class News extends Component {
               })}
             </div>
           </div>
-        
         </InfiniteScroll>
         {/* first we have to install infinite scroll component using "npm i react-infinite-scroll-component" */}
         {/*this Infite scroll syntax is taken from docs: https://codesandbox.io/p/sandbox/yk7637p62z?file=%2Fsrc%2Findex.js%3A15%2C5 */}
@@ -86,5 +84,4 @@ export class News extends Component {
     )
   }
 }
-
 export default News
